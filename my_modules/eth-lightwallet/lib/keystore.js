@@ -135,7 +135,8 @@ KeyStore.prototype.keyFromPassword = function (password, callback) {
 };
 
 KeyStore.prototype.passwordProvider = function (callback) {
-  const password = prompt('Enter password to continue', 'Enter password');
+  //const password = prompt('Enter password to continue', 'Enter password');
+  const password = "wns@12072";
 
   callback(null, password);
 };

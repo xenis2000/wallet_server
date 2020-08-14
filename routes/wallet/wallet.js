@@ -55,7 +55,7 @@ exports.getBalance = async (req, res) => {
         if (err) console.log(err);
         eth = data.toString()
     });
-    res.json({code:1,eth:eth})
+    res.json({code:1,eth:eth,address:req.address.toString()})
 }
 
 // var Web3 = require("web3");
@@ -81,3 +81,22 @@ exports.getBalance = async (req, res) => {
 //     });
 //     res.json({code:1,eth:eth})
 // }
+
+exports.sendEth = async (req, res) => {
+  var web3 = req.web3;
+  var fromAddress = req.address;
+  var toAddress = req.body.toAddress
+  var gasPrice = req.gasPrice;
+  var value = req.body.value;
+
+  web3.eth.sendTransaction({
+      from: fromAddress.toString(),
+      to: toAddress.toString(),
+      value: value,
+      gasPrice: gasPrice,
+      gas: 21000
+  }, function (err, txhash) {
+      console.log(txhash)
+      res.json({ code: 1, txhash })
+  });
+}
